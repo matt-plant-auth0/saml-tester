@@ -1,0 +1,8 @@
+extends layout
+
+block rightButton
+  a#logoutBtn.btn.btn-outline-light(role="button", href="/saml/login/init") SAML Login
+
+block content
+  h1= title
+  p Welcome to #{title}

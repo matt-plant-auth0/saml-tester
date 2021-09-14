@@ -1,0 +1,11 @@
+extends layout
+
+block viewScript
+  script(type='text/javascript', src='../javascripts/samlLogout.js')
+
+block content
+  h1 Successfully logged out!
+  p 
+    | You will be redirected back to your app in 
+    span#countdown 3
+    |  seconds
