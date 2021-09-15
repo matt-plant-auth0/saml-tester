@@ -44,8 +44,8 @@ console.log("----------------------------------\n");
 module.exports = {
   checkUrl,
   APP_URL: appUrl,
-  API_URL: removeTrailingSlashFromUrl(API_URL),
-  ISSUER_BASE_URL: removeTrailingSlashFromUrl(ISSUER_BASE_URL),
+  API_URL: API_URL ? removeTrailingSlashFromUrl(API_URL) : '',
+  ISSUER_BASE_URL: ISSUER_BASE_URL ? removeTrailingSlashFromUrl(ISSUER_BASE_URL) : '',
   CLIENT_ID: CLIENT_ID,
   CLIENT_SECRET: CLIENT_SECRET,
   SAML_PK: SAML_PK,
