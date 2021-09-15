@@ -18,7 +18,7 @@ var {
 var sp = new saml2.ServiceProvider({
   entity_id: "matt-node-sp",
   private_key: SAML_PK,
-  certificate: fs.readFileSync("cert.pem").toString(),
+  certificate: fs.readFileSync("../cert.pem").toString(),
   auth_context: {
       comparison: "exact",
       class_refs: ["urn:oasis:names:tc:SAML:1.0:am:password"]
