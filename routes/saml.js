@@ -6,7 +6,7 @@ var router = express.Router();
 const {
   APP_URL,
   SAML_PK
-} = require("./env-config");
+} = require("../env-config");
 
 var sp = new saml2.ServiceProvider({
   entity_id: "matt-node-sp",
