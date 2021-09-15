@@ -1,7 +1,7 @@
 extends layout
 
 block rightButton
-  a#logoutBtn.btn.btn-outline-light(role="button", href="/saml/logout/init?name_id=" + name_id) SAML Logout
+  a#logoutBtn.btn.btn-outline-light(role="button", href="/saml/logout?name_id=" + name_id) SAML Logout
 
 block content
   h1= title

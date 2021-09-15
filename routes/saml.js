@@ -20,20 +20,15 @@ var sp = new saml2.ServiceProvider({
   nameid_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
   sign_get_request: false,
   allow_unencrypted_assertion: true,
-  assert_endpoint: '',
-  destination: '',
+  assert_endpoint: '/assert',
   force_authn: false,
   context: "Auth0"
 });
 
 var idp = new saml2.IdentityProvider({
-  sso_login_url: '',
-  sso_logout_url: '',
-  certificates: [""]
-});
-
-router.get('/proxy', function(req, res, next) {
-  res.render('samlProxy');
+  sso_login_url: 'https://mattp-demo.eu.auth0.com/samlp/orPLw4uncxdLQgqFatggRilaeqAIe45I',
+  sso_logout_url: 'https://mattp-demo.eu.auth0.com/samlp/orPLw4uncxdLQgqFatggRilaeqAIe45I/logout',
+  certificates: ["MIIDCTCCAfGgAwIBAgIJFEBa75kobWO3MA0GCSqGSIb3DQEBCwUAMCIxIDAeBgNVBAMTF21hdHRwLWRlbW8uZXUuYXV0aDAuY29tMB4XDTIxMDgxMTEwMjEwNVoXDTM1MDQyMDEwMjEwNVowIjEgMB4GA1UEAxMXbWF0dHAtZGVtby5ldS5hdXRoMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDYwC4Yg1Es4cyOwLT6WrhLNDb8iibUk2GooQb4tpmHdLT+a90Ge4WMvkyUrS2xxVmIslHnLSBnkDRJ7W0El8E+7aetVdxPInESg/+DXgbmJthAJe76AFMRFC83RPDnosxc96P/3FnaK4ZkKariHOVFkn/OSEAC7a6GKVM/yDya/6KEbv1GlwuRIrcJqyVMeXhfBfmm/dV749qFUcBpD5VbwRZlON30OHRXs/tGOAkfU1u87WMJ8ABtsGw6qK9RuACLJDoOommRu+wjDEbZtTCySsUJUt0ZJHoOMlp6j8Kx89kSodYtbEn09BzcKG6z/mkQhbk4vc40qsZsbSKav+EXAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFKqDIV9LH27bnNV8vOvhLP5rhgDGMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOCAQEABrCCyxrw088hetDCkpbygleJViRcNUmgCSMhvVT/A5Qhei7xFEGtSXycl9NFrA6lBRqq/Vs4MUdIU5RorAEwvLmo2ny8ynAErHXaBLENSvpUTermwWUgbStateYvVFWmUO+vG1BsmJ1RvxVpi7Tos34c/fIxZQs/K3lskbflfeXwjQK0YKKZgsvlO/CeUgiYevFI75JGMjZI4mxZhHIO0lkD9IuMRkj/9KHLoFQ+RadVBQA0hgaQZCF/+WTH2XdLTAncq4jUgpabPBDP2YYpLiO5c5eYYq8k3VB2zrJ9gYCYyB/Zv+boQKFmhSdnIj4ErJEZokYvI5hCkz7TkOD2Qw=="]
 });
 
 router.get('/error', function(req, res, next) {
@@ -42,10 +37,6 @@ router.get('/error', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('samlLogin');
-});
-
-router.get('/login/init', function(req, res, next) {
   sp.create_login_request_url(idp, {}, function(err, login_url, request_id) {
     if (err != null) {
       return res.send(500);
@@ -54,17 +45,13 @@ router.get('/login/init', function(req, res, next) {
   });
 });
 
-router.get('/logout/init', function(req, res, next) {
+router.get('/logout', function(req, res, next) {
   sp.create_logout_request_url(idp, {name_id: req.query.name_id}, function(err, logout_url) {
     if (err != null) {
       return res.send(500);
     }
     res.redirect(logout_url);
   });
-});
-
-router.get('/logout', function(req, res, next) {
-  res.render('samlLogout');
 });
 
 router.get('/metadata', function(req, res, next) {
