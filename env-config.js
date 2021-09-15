@@ -38,7 +38,6 @@ console.log(`CLIENT_ID: ${CLIENT_ID}`);
 if (CLIENT_SECRET) console.log(`CLIENT_SECRET: Has Value`);
 else console.log(`CLIENT_SECRET: Not Set`);
 console.log(`APP_URL: ${appUrl}`);
-console.log(`SESSION_SECRET: ${SESSION_SECRET}`);
 console.log("----------------------------------\n");
 
 module.exports = {
