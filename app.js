@@ -9,7 +9,21 @@ var samlRouter = require('./routes/saml');
 var jwtRouter = require('./routes/jwt');
 var userDetailsRouter = require('./routes/userdetails');
 
+var {
+  checkUrl,
+  APP_URL,
+  API_URL,
+  ISSUER_BASE_URL,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  SAML_PK,
+  SESSION_SECRET,
+  PORT
+} = require("./env-config");
+
 var app = express();
+
+app.use(checkUrl());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

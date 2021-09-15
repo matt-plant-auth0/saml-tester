@@ -3,9 +3,16 @@ var saml2 = require('saml2-js');
 var fs = require('fs');
 var router = express.Router();
 
-const {
+var {
+  checkUrl,
   APP_URL,
-  SAML_PK
+  API_URL,
+  ISSUER_BASE_URL,
+  CLIENT_ID,
+  CLIENT_SECRET,
+  SAML_PK,
+  SESSION_SECRET,
+  PORT
 } = require("../env-config");
 
 var sp = new saml2.ServiceProvider({
