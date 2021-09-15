@@ -5,14 +5,13 @@ var router = express.Router();
 
 const {
   APP_URL,
-  SAML_CERT,
   SAML_PK
 } = require("./env-config");
 
 var sp = new saml2.ServiceProvider({
   entity_id: "matt-node-sp",
   private_key: SAML_PK,
-  certificate: SAML_CERT,
+  certificate: fs.readFileSync("cert.pem").toString(),
   auth_context: {
       comparison: "exact",
       class_refs: ["urn:oasis:names:tc:SAML:1.0:am:password"]
