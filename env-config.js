@@ -5,13 +5,13 @@ const {
   CLIENT_SECRET,
   SAML_PK,
   VERCEL_URL,
-  VERCEL_GITHUB_REPO,
-  VERCEL_GITHUB_ORG,
+  VERCEL_GIT_REPO_SLUG,
+  VERCEL_GIT_REPO_OWNER,
   PORT = 7000,
 } = process.env;
 
 const appUrl = VERCEL_URL
-  ? `https://${VERCEL_GITHUB_REPO}-git-main-${VERCEL_GITHUB_ORG.toLowerCase()}.vercel.app`
+  ? `https://${VERCEL_GIT_REPO_SLUG}-git-main-${VERCEL_GIT_REPO_OWNER.toLowerCase()}.vercel.app`
   : `http://localhost:${PORT}`;
 
 function checkUrl() {
