@@ -69,6 +69,7 @@ router.post('/assert', function(req, res, next) {
   var options = {request_body: req.body};
   sp.post_assert(idp, options, function(err, saml_response) {
     if (err != null) {
+      console.error(err);
       return res.send(500);
     }
     var userDetails = Buffer.from(JSON.stringify(saml_response.user)).toString("base64");
