@@ -26,7 +26,7 @@ var sp = new saml2.ServiceProvider({
   nameid_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
   sign_get_request: false,
   allow_unencrypted_assertion: true,
-  assert_endpoint: '/assert',
+  assert_endpoint: '/saml/assert',
   force_authn: false,
   context: "Auth0"
 });
