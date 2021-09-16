@@ -5,7 +5,7 @@
       "src": "bin/www.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["views/*.pug", "public/**"]
+        "includeFiles": ["views/*.pug", "public/**", "cert.pem"]
       }
     }
   ],
