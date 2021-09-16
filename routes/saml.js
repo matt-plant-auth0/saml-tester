@@ -60,6 +60,10 @@ router.get('/logout', function(req, res, next) {
   });
 });
 
+router.post('/logout', function(req, res, next) {
+  res.redirect(301, '/');
+});
+
 router.get('/metadata', function(req, res, next) {
   res.type('application/xml');
   res.status(200).send(sp.create_metadata());
@@ -70,7 +74,7 @@ router.post('/assert', function(req, res, next) {
   sp.post_assert(idp, options, function(err, saml_response) {
     if (err != null) {
       console.error(err);
-      return res.send(500);
+      return res.sendStatus(500);
     }
     var userDetails = Buffer.from(JSON.stringify(saml_response.user)).toString("base64");
     res.redirect(301, `${APP_URL}/userdetails?user=${userDetails}`);
