@@ -1,6 +1,6 @@
 var express = require('express');
-var fetch = require('node-fetch');
 var router = express.Router();
+import fetch from 'node-fetch';
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
