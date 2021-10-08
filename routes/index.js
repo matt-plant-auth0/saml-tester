@@ -1,5 +1,5 @@
 var express = require('express');
-var crypto = require('crypto');
+var fetch = require('node-fetch');
 var router = express.Router();
 
 /* GET home page. */
@@ -11,9 +11,9 @@ router.get('/', async function(req, res, next) {
     },
   };
 
-  const rawConfig = await fetch('/api/saml-config', options);
-  const jsonConfig = await res.json();
-  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: jsonConfig });
+  const response = await fetch('/api/saml-config', options);
+  const json = await response.json();
+  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: json });
 });
 
 module.exports = router;
