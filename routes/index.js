@@ -11,9 +11,9 @@ router.get('/', async function(req, res, next) {
     },
   };
 
-  const res = await fetch('/api/saml-config', options);
-  const json = await res.json();
-  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: json });
+  const rawConfig = await fetch('/api/saml-config', options);
+  const jsonConfig = await res.json();
+  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: jsonConfig });
 });
 
 module.exports = router;
