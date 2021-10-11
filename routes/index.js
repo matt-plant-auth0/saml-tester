@@ -23,7 +23,7 @@ var auth0 = new ManagementClient({
 router.get('/', async function(req, res, next) {
   var clientApp = await auth0.getClient({client_id: 'orPLw4uncxdLQgqFatggRilaeqAIe45I'});
   var samlSettings = clientApp.addons.samlp;
-  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: samlSettings });
+  res.render('index', { title: 'Auth0 SAML Demo', samlSettings: JSON.stringify(samlSettings) });
 });
 
 module.exports = router;
