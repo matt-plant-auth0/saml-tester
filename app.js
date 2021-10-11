@@ -8,7 +8,6 @@ var indexRouter = require('./routes/index');
 var samlRouter = require('./routes/saml');
 var jwtRouter = require('./routes/jwt');
 var userDetailsRouter = require('./routes/userdetails');
-var apiRouter = require('./routes/api');
 
 var {
   checkUrl,
@@ -40,7 +39,6 @@ app.use('/', indexRouter);
 app.use('/saml', samlRouter);
 app.use('/jwt', jwtRouter);
 app.use('/userdetails', userDetailsRouter);
-app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
