@@ -21,7 +21,7 @@ var auth0 = new ManagementClient({
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  var clientApp = await auth0.getClient({client_id: 'orPLw4uncxdLQgqFatggRilaeqAIe45I'});
+  var clientApp = await auth0.getClient({client_id: 'dAdwCCLXEpxFnDcLhOsqKI2SS0B3EoD0'});
   var samlSettings = clientApp.addons.samlp;
   res.render('index', { title: 'Auth0 SAML Demo', samlSettings: JSON.stringify(samlSettings, null, 4) });
 });
