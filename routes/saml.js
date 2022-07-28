@@ -11,6 +11,7 @@ var {
   CLIENT_ID,
   CLIENT_SECRET,
   SAML_PK,
+  SAML_CERT,
   SESSION_SECRET,
   PORT
 } = require("../env-config");
@@ -32,9 +33,9 @@ var sp = new saml2.ServiceProvider({
 });
 
 var idp = new saml2.IdentityProvider({
-  sso_login_url: 'https://mattp-demo.eu.auth0.com/samlp/dAdwCCLXEpxFnDcLhOsqKI2SS0B3EoD0',
-  sso_logout_url: 'https://mattp-demo.eu.auth0.com/samlp/dAdwCCLXEpxFnDcLhOsqKI2SS0B3EoD0/logout',
-  certificates: ["MIIDCTCCAfGgAwIBAgIJFEBa75kobWO3MA0GCSqGSIb3DQEBCwUAMCIxIDAeBgNVBAMTF21hdHRwLWRlbW8uZXUuYXV0aDAuY29tMB4XDTIxMDgxMTEwMjEwNVoXDTM1MDQyMDEwMjEwNVowIjEgMB4GA1UEAxMXbWF0dHAtZGVtby5ldS5hdXRoMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDYwC4Yg1Es4cyOwLT6WrhLNDb8iibUk2GooQb4tpmHdLT+a90Ge4WMvkyUrS2xxVmIslHnLSBnkDRJ7W0El8E+7aetVdxPInESg/+DXgbmJthAJe76AFMRFC83RPDnosxc96P/3FnaK4ZkKariHOVFkn/OSEAC7a6GKVM/yDya/6KEbv1GlwuRIrcJqyVMeXhfBfmm/dV749qFUcBpD5VbwRZlON30OHRXs/tGOAkfU1u87WMJ8ABtsGw6qK9RuACLJDoOommRu+wjDEbZtTCySsUJUt0ZJHoOMlp6j8Kx89kSodYtbEn09BzcKG6z/mkQhbk4vc40qsZsbSKav+EXAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFKqDIV9LH27bnNV8vOvhLP5rhgDGMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOCAQEABrCCyxrw088hetDCkpbygleJViRcNUmgCSMhvVT/A5Qhei7xFEGtSXycl9NFrA6lBRqq/Vs4MUdIU5RorAEwvLmo2ny8ynAErHXaBLENSvpUTermwWUgbStateYvVFWmUO+vG1BsmJ1RvxVpi7Tos34c/fIxZQs/K3lskbflfeXwjQK0YKKZgsvlO/CeUgiYevFI75JGMjZI4mxZhHIO0lkD9IuMRkj/9KHLoFQ+RadVBQA0hgaQZCF/+WTH2XdLTAncq4jUgpabPBDP2YYpLiO5c5eYYq8k3VB2zrJ9gYCYyB/Zv+boQKFmhSdnIj4ErJEZokYvI5hCkz7TkOD2Qw=="]
+  sso_login_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}`,
+  sso_logout_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}/logout`,
+  certificates: [SAML_CERT]
 });
 
 router.get('/error', function(req, res, next) {
