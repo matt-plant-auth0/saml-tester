@@ -32,9 +32,6 @@ function removeTrailingSlashFromUrl(url) {
   return url.substring(0, url.length - 1);
 }
 
-CLIENT_ID = (CLIENT_ID || 'orPLw4uncxdLQgqFatggRilaeqAIe45I');
-M2M_CLIENT = (M2M_CLIENT || '5aZOsT42VDC87cCxErbUZuT8DqII4X7C');
-
 console.log("\n----------------------------------");
 console.log("Envronment Settings:");
 console.log(`ISSUER_BASE_URL: ${ISSUER_BASE_URL}`);
@@ -50,8 +47,8 @@ module.exports = {
   APP_URL: appUrl,
   API_URL: API_URL ? removeTrailingSlashFromUrl(API_URL) : '',
   ISSUER_BASE_URL: ISSUER_BASE_URL ? removeTrailingSlashFromUrl(ISSUER_BASE_URL) : '',
-  CLIENT_ID: CLIENT_ID,
-  M2M_CLIENT: M2M_CLIENT,
+  CLIENT_ID: (CLIENT_ID || 'orPLw4uncxdLQgqFatggRilaeqAIe45I'),
+  M2M_CLIENT: (M2M_CLIENT || '5aZOsT42VDC87cCxErbUZuT8DqII4X7C'),
   M2M_SECRET: M2M_SECRET,
   SAML_PK: SAML_PK,
   SAML_CERT: SAML_CERT,
