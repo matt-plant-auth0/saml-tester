@@ -81,7 +81,7 @@ router.get('/metadata', function(req, res, next) {
   res.status(200).send(sp.create_metadata());
 });
 
-router.get('/idp-metadata', function(req, res, next) {
+router.get('/idp-metadata', async function(req, res, next) {
   res.type('application/json');
   let metadata = await idpMetadata();
   res.status(200).send(JSON.stringify(metadata));
