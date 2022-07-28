@@ -3,6 +3,7 @@ var saml2 = require('saml2-js');
 var fs = require('fs');
 var router = express.Router();
 var parseXMLString = require('xml2js').parseStringPromise;
+var fetch = require('node-fetch');
 
 var {
   checkUrl,
