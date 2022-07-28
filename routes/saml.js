@@ -36,8 +36,9 @@ var sp = new saml2.ServiceProvider({
 var idpMetadata = async () => {
   let metadata = await fetch(`https://mattp-demo.eu.auth0.com/samlp/metadata/${CLIENT_ID}`);
   let metadataJson = await metadata.text();
+  console.warn(metadataJson);
   let parsedMetadata = await parseXMLString(metadataJson);
-  console.log(util.inspect(parsedMetadata, false, null));
+  console.warn(util.inspect(parsedMetadata, false, null));
   return parsedMetadata;
 }
 
