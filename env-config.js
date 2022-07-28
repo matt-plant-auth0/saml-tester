@@ -37,8 +37,8 @@ console.log("Envronment Settings:");
 console.log(`ISSUER_BASE_URL: ${ISSUER_BASE_URL}`);
 console.log(`API_URL: ${API_URL}`);
 console.log(`CLIENT_ID: ${CLIENT_ID}`);
-if (CLIENT_SECRET) console.log(`CLIENT_SECRET: Has Value`);
-else console.log(`CLIENT_SECRET: Not Set`);
+if (M2M_SECRET) console.log(`M2M_SECRET: Has Value`);
+else console.log(`M2M_SECRET: Not Set`);
 console.log(`APP_URL: ${appUrl}`);
 console.log("----------------------------------\n");
 
