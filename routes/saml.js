@@ -83,7 +83,8 @@ router.get('/metadata', function(req, res, next) {
 
 router.get('/idp-metadata', function(req, res, next) {
   res.type('application/json');
-  res.status(200).send(JSON.stringify(idpMetadata));
+  let metadata = await idpMetadata();
+  res.status(200).send(JSON.stringify(metadata));
 });
 
 router.post('/assert', function(req, res, next) {
