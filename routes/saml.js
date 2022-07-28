@@ -3,7 +3,7 @@ var saml2 = require('saml2-js');
 var fs = require('fs');
 var router = express.Router();
 var parseXMLString = require('xml2js').parseStringPromise;
-var fetch = require('node-fetch');
+var request = require('request');
 
 var {
   checkUrl,
@@ -34,13 +34,19 @@ var sp = new saml2.ServiceProvider({
   context: "Auth0"
 });
 
-var idpMetadata = async () => {
-  let metadata = await fetch(`https://mattp-demo.eu.auth0.com/samlp/metadata/${CLIENT_ID}`);
-  let metadataJson = await metadata.text();
-  console.warn(metadataJson);
-  let parsedMetadata = await parseXMLString(metadataJson);
-  console.warn(util.inspect(parsedMetadata, false, null));
-  return parsedMetadata;
+var idpMetadata = () => {
+  return new Promise(resolve, reject => {
+    request.get(`https://mattp-demo.eu.auth0.com/samlp/metadata/${CLIENT_ID}`, async (err, res, body) => {
+      if(res.statusCode === 200){
+        console.warn(body);
+        let parsedMetadata = await parseXMLString(body);
+        console.warn(util.inspect(parsedMetadata, false, null));
+        resolve(parsedMetadata);
+      }else{
+        reject(err);
+      }
+    });
+  });
 }
 
 var idp = new saml2.IdentityProvider({
