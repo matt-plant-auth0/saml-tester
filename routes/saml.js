@@ -4,6 +4,7 @@ var fs = require('fs');
 var router = express.Router();
 var parseXMLString = require('xml2js').parseStringPromise;
 var request = require('request');
+var util = require('util');
 
 var {
   checkUrl,
