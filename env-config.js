@@ -32,6 +32,9 @@ function removeTrailingSlashFromUrl(url) {
   return url.substring(0, url.length - 1);
 }
 
+CLIENT_ID = (CLIENT_ID || 'orPLw4uncxdLQgqFatggRilaeqAIe45I');
+M2M_CLIENT = (M2M_CLIENT || '5aZOsT42VDC87cCxErbUZuT8DqII4X7C');
+
 console.log("\n----------------------------------");
 console.log("Envronment Settings:");
 console.log(`ISSUER_BASE_URL: ${ISSUER_BASE_URL}`);
