@@ -35,7 +35,7 @@ var sp = new saml2.ServiceProvider({
 });
 
 var idpMetadata = () => {
-  return new Promise(resolve, reject => {
+  return new Promise((resolve, reject) => {
     request.get(`https://mattp-demo.eu.auth0.com/samlp/metadata/${CLIENT_ID}`, async (err, res, body) => {
       if(res.statusCode === 200){
         console.warn(body);
