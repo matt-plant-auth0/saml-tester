@@ -53,7 +53,7 @@ var idpMetadata = () => {
 var idp = new saml2.IdentityProvider({
   sso_login_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}`,
   sso_logout_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}/logout`,
-  certificates: [idpMetadata().EntityDescriptor.IDPSSODescriptor[0].KeyDescriptor[0].KeyInfo[0].X509Data[0].X509Certificate[0]]
+  certificates: async () => { await idpMetadata().EntityDescriptor.IDPSSODescriptor[0].KeyDescriptor[0].KeyInfo[0].X509Data[0].X509Certificate[0] }
 });
 
 router.get('/error', function(req, res, next) {
