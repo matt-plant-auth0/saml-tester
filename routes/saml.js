@@ -6,6 +6,8 @@ var parseXMLString = require('xml2js').parseStringPromise;
 var request = require('request');
 var util = require('util');
 
+var createdIdp;
+
 var {
   checkUrl,
   APP_URL,
@@ -50,18 +52,33 @@ var idpMetadata = () => {
   });
 }
 
-var idp = new saml2.IdentityProvider({
+let createIdp = async () => {
+  let metadata = await idpMetadata();
+  if(!createdIdp)
+  {
+    var idp = new saml2.IdentityProvider({
+      sso_login_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}`,
+      sso_logout_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}/logout`,
+      certificates: metadata.EntityDescriptor.IDPSSODescriptor[0].KeyDescriptor[0].KeyInfo[0].X509Data[0].X509Certificate[0]
+    });
+    createdIdp = idp;
+  }
+  return createdIdp;
+}
+
+/*var idp = new saml2.IdentityProvider({
   sso_login_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}`,
   sso_logout_url: `https://mattp-demo.eu.auth0.com/samlp/${CLIENT_ID}/logout`,
-  certificates: (async () => { return await idpMetadata()}).EntityDescriptor.IDPSSODescriptor[0].KeyDescriptor[0].KeyInfo[0].X509Data[0].X509Certificate[0]
-});
+  certificates: []
+});*/
 
 router.get('/error', function(req, res, next) {
   res.locals.error = JSON.parse(req.query.error);
   res.render('samlError');
 });
 
-router.get('/login', function(req, res, next) {
+router.get('/login', async function(req, res, next) {
+  let idp = await createIdp();
   sp.create_login_request_url(idp, {}, function(err, login_url, request_id) {
     if (err != null) {
       return res.send(500);
@@ -70,7 +87,8 @@ router.get('/login', function(req, res, next) {
   });
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/logout', async function(req, res, next) {
+  let idp = await createIdp();
   sp.create_logout_request_url(idp, {name_id: req.query.name_id}, function(err, logout_url) {
     if (err != null) {
       return res.send(500);
@@ -94,8 +112,9 @@ router.get('/idp-metadata', async function(req, res, next) {
   res.status(200).send(JSON.stringify(metadata));
 });
 
-router.post('/assert', function(req, res, next) {
+router.post('/assert', async function(req, res, next) {
   var options = {request_body: req.body};
+  let idp = await createIdp();
   sp.post_assert(idp, options, function(err, saml_response) {
     if (err != null) {
       console.error(err);
